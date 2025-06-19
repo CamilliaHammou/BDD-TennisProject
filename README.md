@@ -1,89 +1,104 @@
-# Tennis Kata - BDD Project
+# Tennis Kata - Approche BDD
 
-Ce projet implémente un kata de scoring de tennis avec une approche BDD (Behavior Driven Development) utilisant `pytest` et `pytest-bdd`
+Implémentation du kata Tennis en utilisant Behavior Driven Development avec Python.
 
-## Règles des points au tennis
+## Pourquoi ce kata ?
 
-- Points : 0, 15, 30, 40
-- Deuce : Les deux joueurs à 40 points
-- Avantage : Un joueur en tête après la deuxième manche
-- Victoire : Premier à 4 points avec 2 points d'avance
+Le Tennis présente des règles métier intéressantes pour démontrer l'approche BDD : scoring particulier, cas deuce/advantage, gestion des victoires. Chaque règle devient un scénario testable :)
 
----
+## Règles implémentées
 
-## Installation et configuration
+### Scoring tennis
+- **0 point** → "0" (love)
+- **1 point** → "15" 
+- **2 points** → "30"
+- **3 points** → "40"
 
-### Prérequis
+### Cas spéciaux
+- **Deuce** : 40-40, il faut 2 points d'écart pour gagner
+- **Advantage** : un joueur mène d'1 point après deuce
+- **Retour deuce** : égalisation depuis advantage
 
-- Python 3.8 ou supérieur
+### Victoire
+Premier à 4 points avec minimum 2 d'écart.
 
-### Étapes
+## Architecture
 
-1. **Créer un environnement virtuel**
+```
+BDD-TennisProject/
+├── src/tennis/        #Code métier
+│   ├── game.py        #Logique du jeu
+│   └── score.py       #Gestion affichage scores
+├── tests/unit/        #Tests unitaire
+└── tests/bdd/         #Tests comportementaux
+    ├── features/      #Specifications Gherkin
+    └── steps/         #Definitions steps
+```
 
+## Installation
+
+1. **Environnement virtuel**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  #Linux/mac
+   ```
+
+2. **Installation projet**
+   ```bash
+   pip install -r requirements.txt
+   pip install -e .
+   ```
+
+## Tests
+
+### Tous les tests
 ```bash
-python3 -m venv venv
+pytest tests/unit/ tests/bdd/steps/tennis_steps.py --cov=src/tennis -v
 ```
 
-2. **Activer l’environnement virtuel**
-
-- Linux/macOS :
-
+### Tests unitaires seulement
 ```bash
-source venv/bin/activate
+pytest tests/unit/ -v
 ```
 
-- Windows (PowerShell) :
-
-```powershell
-.env\Scriptsactivate
-```
-
-3. **Installer les dépendances**
-
+### Scénarios BDD seulement  
 ```bash
-pip install -e .
+pytest tests/bdd/steps/tennis_steps.py -v
 ```
 
-Cette commande installe le projet en mode editable ainsi que les dépendances listées dans `setup.py` (`pytest`, `pytest-bdd`, `pytest-cov`).
+## Approche BDD
 
-4. **Vérifier les paquets installés**
+Nous avons écrit 24 scénarios Gherkin couvrant :
+- Progression scores (15-0, 30-15, etc.)
+- Situations deuce et advantage
+- Victoires directes et depuis advantage
+- Gestion d'erreurs
 
-```bash
-pip show pytest pytest-bdd pytest-cov
+Chaque scénario valide un comportement métier spécifique.
+
+### Exemple de scénario
+```gherkin
+Scenario: Player 1 gets advantage
+  Given both players have scored 3 points
+  When Player 1 scores a point
+  Then the score should be "Advantage Player 1"
 ```
 
----
+## Résultats
 
-## Utilisation
+- **36 tests** (12 unitaires + 24 BDD)
+- **100% couverture** de code
+- **Toutes les règles tennis** sont bien validées
 
-### Lancer les tests
+## Technologies
 
-```bash
-pytest --cov=src tests/
-pytest tests/bdd/ -v
-```
+- **Python 3.12**
+- **pytest** pour les tests unitaires
+- **pytest-bdd** pour les scénarios Gherkin (équivalent de cucumber)
+- **pytest-cov** pour la couverture
 
-- Lance tous les tests unitaires et BDD.
-- Affiche un rapport de couverture de code.
+## Équipe
 
----
+**Denisa DUDAS** & **Camillia HAMMOU** - 4AL1
 
-## Structure des tests
-
-- Tests BDD dans `tests/bdd/` avec les fichiers `.feature` et les définitions de steps.
-- Tests unitaires dans `tests/unit/` pour tester les modules individuellement.
-
----
-
-## Remarques
-
-- Utilisation d’un environnement virtuel pour isoler les dépendances du projet.
-- Le mode editable (`pip install -e .`) va nous permettre de tester facilement les modifications du code source sans réinstaller tout à chaque fois.
-- Le projet suit une architecture claire avec `src/` pour le code et `tests/` pour les tests.
----
-
-## Auteur
-
-Denisa DUDAS 4AL1 et 
-Camillia HAMMOU 4AL1
+Projet réalisé dans le cadre du cours BDD - ESGI 2024-2025
