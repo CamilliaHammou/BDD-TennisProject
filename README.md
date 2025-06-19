@@ -40,7 +40,7 @@ BDD-TennisProject/
 1. **Environnement virtuel**
    ```bash
    python3 -m venv venv
-   source venv/bin/activate  #Linux/mac
+   source venv/bin/activate #linux/mac
    ```
 
 2. **Installation projet**
@@ -68,25 +68,25 @@ pytest tests/bdd/steps/tennis_steps.py -v
 
 ## Approche BDD
 
-Nous avons écrit 24 scénarios Gherkin couvrant :
-- Progression scores (15-0, 30-15, etc.)
+Nous avons écrit 22 scénarios Gherkin couvrant :
+- Progression scores (15-0, 30-15, ..)
 - Situations deuce et advantage
-- Victoires directes et depuis advantage
+- Victoires directe et depuis advantage
 - Gestion d'erreurs
 
-Chaque scénario valide un comportement métier spécifique.
+Chaque scénario valide un comportement métier specifique.
 
 ### Exemple de scénario
 ```gherkin
-Scenario: Player 1 gets advantage
-  Given both players have scored 3 points
-  When Player 1 scores a point
-  Then the score should be "Advantage Player 1"
+Scenario: Camillia gets advantage
+  Given Camillia and Denisa both have scored 3 points
+  When Camillia scores a point
+  Then the score should be "Advantage Camillia"
 ```
 
 ## Résultats
 
-- **36 tests** (12 unitaires + 24 BDD)
+- **34 tests** (12 unitaires + 22 BDD)
 - **100% couverture** de code
 - **Toutes les règles tennis** sont bien validées
 
@@ -101,4 +101,4 @@ Scenario: Player 1 gets advantage
 
 **Denisa DUDAS** & **Camillia HAMMOU** - 4AL1
 
-Projet réalisé dans le cadre du cours BDD - ESGI 2024-2025
+Projet réalisé dans le cadre du cours BDD / ESGI 2024-2025
