@@ -1,6 +1,6 @@
 # Tennis Kata - BDD Project
 
-Ce projet implémente un kata de scoring de tennis avec une approche BDD (Behavior-Driven Development) utilisant `pytest` et `pytest-bdd`.
+Ce projet implémente un kata de scoring de tennis avec une approche BDD (Behavior Driven Development) utilisant `pytest` et `pytest-bdd`
 
 ---
 
