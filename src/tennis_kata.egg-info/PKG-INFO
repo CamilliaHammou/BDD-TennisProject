@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: tennis-kata
+Version: 1.0.0
+Summary: Tennis scoring kata with BDD approach
+Requires-Python: >=3.8
+Requires-Dist: pytest>=7.4.3
+Requires-Dist: pytest-bdd>=7.0.0
+Requires-Dist: pytest-cov>=4.1.0
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
