@@ -2,6 +2,13 @@
 
 Ce projet implémente un kata de scoring de tennis avec une approche BDD (Behavior Driven Development) utilisant `pytest` et `pytest-bdd`
 
+## Règles des points au tennis
+
+- Points : 0, 15, 30, 40
+- Deuce : Les deux joueurs à 40 points
+- Avantage : Un joueur en tête après la deuxième manche
+- Victoire : Premier à 4 points avec 2 points d'avance
+
 ---
 
 ## Installation et configuration
@@ -54,6 +61,7 @@ pip show pytest pytest-bdd pytest-cov
 
 ```bash
 pytest --cov=src tests/
+pytest tests/bdd/ -v
 ```
 
 - Lance tous les tests unitaires et BDD.
