@@ -2,7 +2,7 @@ from enum import Enum
 from typing import NamedTuple, Optional
 
 class GameState(Enum):
-    """ici on va representer les differentes etape d'un match de tennis."""
+    """ici on va representer les differentes etape d'un match de tennis"""
     REGULAR = "regular"
     DEUCE = "deuce"
     ADVANTAGE = "advantage"
