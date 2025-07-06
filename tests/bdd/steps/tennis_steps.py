@@ -8,7 +8,6 @@ scenarios('../features/tennis.feature')
 def tennis_game():
     return TennisGame("Camillia", "Denisa")
 
-#GIVEN
 @given('a new tennis game between Camillia and Denisa')
 def new_tennis_game(tennis_game):
     return tennis_game
@@ -42,7 +41,7 @@ def camillia_has_won_game(tennis_game):
     for _ in range(4):
         tennis_game.score_point("Camillia")
 
-#WHEN
+
 @when('Camillia scores a point')
 def camillia_scores_point(tennis_game):
     tennis_game.score_point("Camillia")
@@ -66,10 +65,8 @@ def unknown_player_attempts_to_score(tennis_game):
     with pytest.raises(ValueError):
         tennis_game.score_point("Unknown Player")
 
-#THEN
 @then(parsers.parse('the score should be "{expected_score}"'))
 def check_score(tennis_game, expected_score):
-    """Step to verify the score."""
     actual_score = tennis_game.get_score().display_score
     assert actual_score == expected_score, f"Expected '{expected_score}', got '{actual_score}'"
 
