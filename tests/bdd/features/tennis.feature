@@ -9,119 +9,104 @@ Feature: Tennis Game Scoring
   Scenario: New game starts at love all
     Then the score should be "0-0"
 
-  Scenario: Camillia scores first point
-    When Camillia scores a point
+  # Standard progression - grouped for clarity
+  Scenario: First point scored
+    When Camillia wins her first rally
     Then the score should be "15-0"
 
-  Scenario: Camillia takes early lead
-    When Camillia scores a point
-    And Camillia scores a point
+  Scenario: Building early momentum  
+    When Camillia wins two consecutive rallies
     Then the score should be "30-0"
 
-  Scenario: Camillia reaches game point
-    When Camillia scores a point
-    And Camillia scores a point
-    And Camillia scores a point
+  Scenario: Reaching game point
+    When Camillia wins three consecutive rallies
     Then the score should be "40-0"
 
-  Scenario: Competitive rally
-    When Camillia scores a point
-    And Denisa scores a point
-    And Camillia scores a point
-    And Denisa scores a point
-    Then the score should be "30-30"
-
-  Scenario: Denisa wins convincingly
-    When Denisa scores a point
-    And Denisa scores a point
-    And Denisa scores a point
-    And Denisa scores a point
-    Then the score should be "Game won by Denisa"
-
-  Scenario: Camillia closes out the game
-    Given Camillia has scored 3 points
-    And Denisa has scored 2 points
-    When Camillia scores a point
+  Scenario: Dominating performance
+    When Camillia wins four consecutive rallies
     Then the score should be "Game won by Camillia"
 
-  Scenario: Deuce situation
-    Given Camillia and Denisa both have scored 3 points
-    Then the score should be "Deuce"
-
-  Scenario: Camillia gets advantage
-    Given Camillia and Denisa both have scored 3 points
-    When Camillia scores a point
-    Then the score should be "Advantage Camillia"
-
-  Scenario: Denisa gets advantage
-    Given Camillia and Denisa both have scored 3 points
-    When Denisa scores a point
-    Then the score should be "Advantage Denisa"
-
-  Scenario: Camillia wins from advantage
-    Given Camillia and Denisa both have scored 3 points
-    And Camillia has advantage
-    When Camillia scores a point
-    Then the score should be "Game won by Camillia"
-
-  Scenario: Denisa wins from advantage
-    Given Camillia and Denisa both have scored 3 points
-    And Denisa has advantage
-    When Denisa scores a point
-    Then the score should be "Game won by Denisa"
-
-  Scenario: Back to deuce from advantage
-    Given Camillia and Denisa both have scored 3 points
-    And Camillia has advantage
-    When Denisa scores a point
-    Then the score should be "Deuce"
-
-  Scenario: Multiple deuce cycles
-    Given Camillia and Denisa both have scored 3 points
-    When Camillia scores a point
-    And Denisa scores a point
-    And Camillia scores a point
-    And Denisa scores a point
-    Then the score should be "Deuce"
-
-  Scenario: Denisa catches up to deuce
-    Given Camillia has scored 2 points
-    And Denisa has scored 3 points
-    When Camillia scores a point
-    Then the score should be "Deuce"
-
-  Scenario: Camillia dominates early
-    When Camillia scores 4 points
-    Then the score should be "Game won by Camillia"
-
-  Scenario: Even start
-    When Camillia scores a point
-    And Denisa scores a point
+  # Competitive exchanges
+  Scenario: Trading rallies evenly
+    When both players win their opening rally
     Then the score should be "15-15"
 
-  Scenario: Camillia leads
-    When Camillia scores a point
-    And Camillia scores a point
-    And Denisa scores a point
+  Scenario: Back and forth battle
+    When players alternate winning four rallies
+    Then the score should be "30-30"
+
+  Scenario: Camillia takes control
+    When Camillia leads after three rallies to one
     Then the score should be "30-15"
 
-  Scenario: Denisa leads
-    When Denisa scores a point
-    And Denisa scores a point
-    And Camillia scores a point
+  Scenario: Denisa fights back
+    When Denisa leads after three rallies to one  
     Then the score should be "15-30"
 
-  Scenario: Camillia at game point
+  Scenario: Camillia at game point under pressure
     Given Camillia has scored 3 points
     And Denisa has scored 2 points
     Then the score should be "40-30"
 
-  Scenario: Denisa at game point
+  Scenario: Denisa at game point under pressure
     Given Denisa has scored 3 points
     And Camillia has scored 2 points
     Then the score should be "30-40"
 
-  Scenario: Cannot score after Camillia wins
+  # Victory scenarios
+  Scenario: Denisa claims convincing victory
+    When Denisa wins four consecutive rallies
+    Then the score should be "Game won by Denisa"
+
+  Scenario: Camillia closes out under pressure
+    Given Camillia has scored 3 points
+    And Denisa has scored 2 points
+    When Camillia wins the decisive rally
+    Then the score should be "Game won by Camillia"
+
+  # Deuce situations
+  Scenario: Battle reaches deuce
+    Given both players have won 3 rallies each
+    Then the score should be "Deuce"
+
+  Scenario: Catching up to force deuce
+    Given Camillia has scored 2 points
+    And Denisa has scored 3 points
+    When Camillia wins the equalizing rally
+    Then the score should be "Deuce"
+
+  Scenario: Camillia seizes advantage
+    Given both players have reached deuce
+    When Camillia wins the next rally
+    Then the score should be "Advantage Camillia"
+
+  Scenario: Denisa seizes advantage
+    Given both players have reached deuce
+    When Denisa wins the next rally
+    Then the score should be "Advantage Denisa"
+
+  Scenario: Camillia converts advantage to victory
+    Given Camillia has advantage after deuce
+    When Camillia wins the championship rally
+    Then the score should be "Game won by Camillia"
+
+  Scenario: Denisa converts advantage to victory
+    Given Denisa has advantage after deuce
+    When Denisa wins the championship rally
+    Then the score should be "Game won by Denisa"
+
+  Scenario: Advantage neutralized back to deuce
+    Given Camillia has advantage after deuce
+    When Denisa wins the neutralizing rally
+    Then the score should be "Deuce"
+
+  Scenario: Extended deuce battle continues
+    Given both players have reached deuce
+    When both players win two alternating rallies
+    Then the score should return to "Deuce"
+
+  # Game integrity
+  Scenario: Game ends - no further scoring allowed
     Given Camillia has won the game
     When Denisa attempts to score
     Then an error should be raised
